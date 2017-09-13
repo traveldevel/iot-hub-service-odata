@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "",
   "main": "index.js",
-  "engines":{
+  "engines": {
     "node": "8.2.1"
   },
   "scripts": {
@@ -32,6 +32,7 @@
     "cors": "^2.8.4",
     "express": "^4.15.4",
     "mongodb": "^2.2.31",
+    "mongodb-uri": "^0.9.7",
     "simple-odata-server": "^0.3.1"
   }
 }
