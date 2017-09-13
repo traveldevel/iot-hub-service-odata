@@ -48,7 +48,7 @@ var mongoUrl = mongoCredentials.uri;
 var mongoClient = require('mongodb').MongoClient;
 
 console.log(mongoServiceName + " found in VCAP_SERVICES : ")
-console.log(mongoService);
+//console.log(mongoService);
 
 var mongoCredentials = {};
 var mongoUrl = '';
