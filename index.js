@@ -1,12 +1,19 @@
 // Assign the required packages and dependencies to variables
-var express = require('express');
-var ODataServer = require("simple-odata-server");
-var MongoClient = require('mongodb').MongoClient;
-var cors = require("cors");
-var cfenv = require("cfenv");
+require('dotenv').config();
 
-var landscapeName = process.env.landscapeName;
-var tenantName = process.env.tenantName;
+const express = require('express');
+const ODataServer = require("simple-odata-server");
+const MongoClient = require('mongodb').MongoClient;
+const cors = require("cors");
+const cfenv = require("cfenv");
+const basicAuth = require('basic-auth');
+
+const landscapeName = process.env.landscapeName;
+const tenantName = process.env.tenantName;
+
+const port = process.env.PORT || 8080;
+const authorizedUsers = process.env.BASIC_AUTH_USERS.split(',');
+const authorizedUserPasswords = process.env.BASIC_AUTH_USER_PASSWORDS.split(',');
 
 // Create app variable to initialize Express 
 var app = express();
@@ -72,12 +79,32 @@ MongoClient.connect(mongoUrl, function(err, db) {
     odataServer.onMongo(function(cb) { cb(err, db); });
 });
 
+// auth global function
+const auth = function (req, res, next) {
+    function unauthorized(res) {
+        res.set('WWW-Authenticate', 'Basic realm=Authorization Required');
+        return res.sendStatus(401);
+    };
+
+    var user = basicAuth(req);
+
+    if (!user || !user.name || !user.pass) {
+        return unauthorized(res);
+    };
+
+    if (authorizedUsers.indexOf(user.name) >= 0 && authorizedUserPasswords.indexOf(user.pass) >= 0) {
+        return next();
+    } else {
+        return unauthorized(res);
+    };
+};
+
 // The directive to set app route path.
-app.use("/", function (req, res) {
+app.use("/", auth, function (req, res) {
     odataServer.handle(req, res);
 });
 
-// The app listens on port 8080 and prints the endpoint URI in console window.
-var server = app.listen(8080, function () {
+// The app listens on port 8080 (or other from env) and prints the endpoint URI in console window.
+var server = app.listen(port, function () {
     console.log('OData service listening on ' + appEnv.url + ':' + process.env.PORT);
 });
