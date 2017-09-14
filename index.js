@@ -53,12 +53,91 @@ var model = {
             "name": { "type": "Edm.String"},
             "password": { "type": "Edm.String"},  
             "roles": { "type": "Collection(Edm.String)"}                
-        }
+        },
+        'project': {
+            "_id": { "type": "Edm.String", key: true},        
+            "project_name": { "type": "Edm.String"},
+            "description": { "type": "Edm.String"}             
+        },
+        'device_group': {
+            "_id": { "type": "Edm.String", key: true},
+            "project_id": { "type": "Edm.String"},    
+            "group_name": { "type": "Edm.String"},
+            "description": { "type": "Edm.String"}             
+        },
+        'device_schema':{
+            "_id": { "type": "Edm.String", key: true},
+            "project_id": { "type": "Edm.String"},    
+            "schema_name": { "type": "Edm.String"},
+            "description": { "type": "Edm.String"},
+            "values" : { "type": "Collection(Edm.String)"}
+        },
+        'device':{
+            "_id": { "type": "Edm.String", key: true},
+            "project_id": { "type": "Edm.String"},
+            "group_id": { "type": "Edm.String"}, 
+            "device_name": { "type": "Edm.String"},
+            "auth_token": { "type": "Edm.String"},
+            "description": { "type": "Edm.String"},
+            "created_at": { "type": "Edm.DateTime"},
+            "last_contact": { "type": "Edm.DateTime"},
+            "mandatory_schema_id": { "type": "Edm.String", key: true}, 
+            "validate_schema": { "type": "Edm.Boolean"}
+        },
+        'location':{
+            "_id": { "type": "Edm.String", key: true},
+            "project_id": { "type": "Edm.String"},
+            "group_id": { "type": "Edm.String"}, 
+            "device_id": { "type": "Edm.String"},
+            "latitude": { "type": "Edm.Decimal"},
+            "longitude": { "type": "Edm.Decimal"},
+            "accuracy": { "type": "Edm.Integer"},
+            "speed": { "type": "Edm.Integer"},
+            "recorded_time": { "type": "Edm.DateTime"},
+            "created_at": { "type": "Edm.DateTime"}
+        },
+        'raw_data':{
+            "_id": { "type": "Edm.String", key: true},
+            "project_id": { "type": "Edm.String"},
+            "group_id": { "type": "Edm.String"}, 
+            "device_id": { "type": "Edm.String"},
+            "recorded_time": { "type": "Edm.DateTime"},
+            "created_at": { "type": "Edm.DateTime"},
+            "values" : { "type": "Collection(Edm.String)"}
+        },  
+        'event':{
+            "_id": { "type": "Edm.String", key: true},
+            "project_id": { "type": "Edm.String"},
+            "group_id": { "type": "Edm.String"}, 
+            "device_id": { "type": "Edm.String"},
+            "type": { "type": "Edm.String"},
+            "text": { "type": "Edm.String"},
+            "dismissed": { "type": "Edm.String"},
+            "user_id": { "type": "Edm.String"}         
+        },  
+        'command':{
+            "_id": { "type": "Edm.String", key: true},
+            "project_id": { "type": "Edm.String"},
+            "group_id": { "type": "Edm.String"}, 
+            "device_id": { "type": "Edm.String"},
+            "type": { "type": "Edm.String"},
+            "command": { "type": "Edm.String"},
+            "created_at": { "type": "Edm.DateTime"},
+            "confirmed_at": { "type": "Edm.DateTime"}      
+        }   
     },   
     entitySets: {}
 };
 
 model.entitySets[tenantName + "_user"] = { entityType: mongoDbName + ".user" };
+model.entitySets[tenantName + "_project"] = { entityType: mongoDbName + ".project" };
+model.entitySets[tenantName + "_device_group"] = { entityType: mongoDbName + ".device_group" };
+model.entitySets[tenantName + "_device_schema"] = { entityType: mongoDbName + ".device_schema" };
+model.entitySets[tenantName + "_device"] = { entityType: mongoDbName + ".device" };
+model.entitySets[tenantName + "_location"] = { entityType: mongoDbName + ".location" };
+model.entitySets[tenantName + "_raw_data"] = { entityType: mongoDbName + ".raw_data" };
+model.entitySets[tenantName + "_event"] = { entityType: mongoDbName + ".event" };
+model.entitySets[tenantName + "_command"] = { entityType: mongoDbName + ".command" };
 
 // Instantiates ODataServer and assigns to odataserver variable.
 var odataServer = ODataServer().model(model);
