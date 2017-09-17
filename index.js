@@ -1,6 +1,9 @@
-// Assign the required packages and dependencies to variables
+"use strict";
+
+// Load env vars from .env
 require('dotenv').config();
 
+// Assign the required packages and dependencies to variables
 const express = require('express');
 const ODataServer = require("simple-odata-server");
 const MongoClient = require('mongodb').MongoClient;
@@ -8,19 +11,17 @@ const cors = require("cors");
 const cfenv = require("cfenv");
 const basicAuth = require('basic-auth');
 
-const landscapeName = process.env.landscapeName;
-const tenantName = process.env.tenantName;
+const landscapeName = process.env.LANDSCAPE_NAME;
+const tenantName = process.env.TENANT_NAME;
 
 const port = process.env.PORT || 8080;
 const authorizedUsers = process.env.BASIC_AUTH_USERS.split(',');
 const authorizedUserPasswords = process.env.BASIC_AUTH_USER_PASSWORDS.split(',');
 
-// Create app variable to initialize Express 
-var app = express();
-app.use(cors());
-
-// mongo connect and create missing collections
+// configs from env vars
 var appEnv = cfenv.getAppEnv();
+//console.log(appEnv.getServices());
+
 var mongoServiceName = "iot_hub_mongo_" + landscapeName;
 var mongoService = appEnv.getService(mongoServiceName);
 var mongoCredentials = appEnv.getServiceCreds(mongoServiceName);
@@ -177,6 +178,10 @@ const auth = function (req, res, next) {
         return unauthorized(res);
     };
 };
+
+// Create app variable to initialize Express 
+var app = express();
+app.use(cors());
 
 // The directive to set app route path.
 app.use("/", auth, function (req, res) {
