@@ -116,6 +116,15 @@ var model = {
             "dismissed": { "type": "Edm.String"},
             "user_id": { "type": "Edm.String"}         
         },  
+        'event_rule':{
+            "_id": { "type": "Edm.String", key: true},
+            "project_id": { "type": "Edm.String"},
+            "group_id": { "type": "Edm.String"}, 
+            "device_id": { "type": "Edm.String"},
+            "rule_name": { "type": "Edm.String"},
+            "operator": { "type": "Edm.String"},
+            "operator_reference": { "type": "Edm.String"}      
+        },         
         'command':{
             "_id": { "type": "Edm.String", key: true},
             "project_id": { "type": "Edm.String"},
@@ -138,6 +147,7 @@ model.entitySets[tenantName + "_device"] = { entityType: mongoDbName + ".device"
 model.entitySets[tenantName + "_location"] = { entityType: mongoDbName + ".location" };
 model.entitySets[tenantName + "_raw_data"] = { entityType: mongoDbName + ".raw_data" };
 model.entitySets[tenantName + "_event"] = { entityType: mongoDbName + ".event" };
+model.entitySets[tenantName + "_event_rule"] = { entityType: mongoDbName + ".event_rule" };
 model.entitySets[tenantName + "_command"] = { entityType: mongoDbName + ".command" };
 
 // Instantiates ODataServer and assigns to odataserver variable.
