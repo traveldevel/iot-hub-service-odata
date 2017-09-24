@@ -100,11 +100,11 @@ var model = {
     entitySets: {}
 };
 
-model.entitySets["users"] = { entityType: mongoDbName + ".user" };
-model.entitySets["projects"] = { entityType: mongoDbName + ".project" };
-model.entitySets["device_groups"] = { entityType: mongoDbName + ".device_group" };
-model.entitySets["device_schemas"] = { entityType: mongoDbName + ".device_schema" };
-model.entitySets["devices"] = { entityType: mongoDbName + ".device" };
+model.entitySets["user"] = { entityType: mongoDbName + ".user" };
+model.entitySets["project"] = { entityType: mongoDbName + ".project" };
+model.entitySets["device_group"] = { entityType: mongoDbName + ".device_group" };
+model.entitySets["device_schema"] = { entityType: mongoDbName + ".device_schema" };
+model.entitySets["device"] = { entityType: mongoDbName + ".device" };
 
 // Instantiates ODataServer and assigns to odataserver variable.
 var odataServer = ODataServer().model(model);
