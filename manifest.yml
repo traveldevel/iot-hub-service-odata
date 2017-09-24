@@ -1,5 +1,5 @@
 applications:
- - name: iot-hub-service-odata-tenant-shared-new
+ - name: iot-hub-service-odata-shared-new-metadata
    memory: 64M
    disk_quota: 128M
    buildpack: https://github.com/cloudfoundry/nodejs-buildpack
