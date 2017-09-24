@@ -1,1 +1,1 @@
-# iot-hub-service-odata
+# iot-hub-service-odata-metadata
