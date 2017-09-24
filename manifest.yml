@@ -4,5 +4,4 @@ applications:
    disk_quota: 128M
    buildpack: https://github.com/cloudfoundry/nodejs-buildpack
    services:
-    - iot_hub_mongo_shared
-
+    - iot_hub_mongo_shared_new_metadata
