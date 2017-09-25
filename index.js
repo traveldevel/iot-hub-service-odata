@@ -21,7 +21,7 @@ const authorizedUserPasswords = process.env.BASIC_AUTH_USER_PASSWORDS.split(',')
 // configs from env vars
 var appEnv = cfenv.getAppEnv();
 const services = appEnv.getServices();
-//console.log(services);
+console.log(services);
 
 // get mongo url from service function
 var getMongoUrlForService = function(mongoServiceName) {
@@ -93,7 +93,7 @@ var model = {
             "description": { "type": "Edm.String"},
             "created_at": { "type": "Edm.DateTime"},
             "last_contact": { "type": "Edm.DateTime"},
-            "mandatory_schema_id": { "type": "Edm.String", key: true}, 
+            "mandatory_schema_id": { "type": "Edm.String"}, 
             "validate_schema": { "type": "Edm.Boolean"}
         }
     },   
