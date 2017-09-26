@@ -94,6 +94,7 @@ var model = {
             "created_at": { "type": "Edm.DateTime"},
             "last_contact_ping": { "type": "Edm.DateTime"},
             "last_contact_rawdata": { "type": "Edm.DateTime"},
+            "last_contact_location": { "type": "Edm.DateTime"},
             "last_event_triggered": { "type": "Edm.DateTime"},
             "last_command_sent": { "type": "Edm.DateTime"},
             "last_command_confirmed": { "type": "Edm.DateTime"},
