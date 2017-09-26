@@ -92,7 +92,11 @@ var model = {
             "auth_token": { "type": "Edm.String"},
             "description": { "type": "Edm.String"},
             "created_at": { "type": "Edm.DateTime"},
-            "last_contact": { "type": "Edm.DateTime"},
+            "last_contact_ping": { "type": "Edm.DateTime"},
+            "last_contact_rawdata": { "type": "Edm.DateTime"},
+            "last_event_triggered": { "type": "Edm.DateTime"},
+            "last_command_sent": { "type": "Edm.DateTime"},
+            "last_command_confirmed": { "type": "Edm.DateTime"},
             "mandatory_schema_id": { "type": "Edm.String"}, 
             "validate_schema": { "type": "Edm.Boolean"}
         }
