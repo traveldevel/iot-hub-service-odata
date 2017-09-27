@@ -101,7 +101,7 @@ var model = {
             "mandatory_schema_id": { "type": "Edm.String"}, 
             "validate_schema": { "type": "Edm.Boolean"},
             "trigger_events": { "type": "Edm.Boolean"},
-            "archive_to_coldstore": { "type": "Edm.Boolean"},
+            "archive_to_coldstore": { "type": "Edm.Boolean"}
         }
     },   
     entitySets: {}
