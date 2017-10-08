@@ -166,7 +166,7 @@ app.use(cors({
     allowedOrigins: [
         'localhost:8080', 'iot-hub-ui-app-shared-new.cfapps.io', 'iothubkafkashared.westeurope.cloudapp.azure.com'
     ]
-}))
+}));
 
 // The directive to set app route path.
 app.use("/", auth, function (req, res) {
