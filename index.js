@@ -165,6 +165,9 @@ var app = express();
 app.use(cors({
     allowedOrigins: [
         'localhost:8080', 'iot-hub-ui-app-shared-new.cfapps.io', 'iothubkafkashared.westeurope.cloudapp.azure.com'
+    ],
+    headers: [
+        'X-CSRF-Token', 'OData-Version', 'MIME-Version', 'OData-MaxVersion', 'Content-Type'
     ]
 }));
 
