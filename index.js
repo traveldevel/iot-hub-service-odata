@@ -63,6 +63,8 @@ var model = {
         'user': {
             "_id": { "type": "Edm.String", key: true},        
             "name": { "type": "Edm.String"},
+            "firstname": { "type": "Edm.String"},
+            "lastname": { "type": "Edm.String"},
             "password": { "type": "Edm.String"},  
             "roles": { "type": "Edm.String"}                
         },
