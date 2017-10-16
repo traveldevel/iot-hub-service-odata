@@ -41,11 +41,11 @@ var getMongoUrlForService = function(mongoServiceName) {
         var mongodbUri = require('mongodb-uri');
         var uriObject = mongodbUri.parse(mongoUrl);
         mongoDbName = uriObject.database;
+        
+        console.log("'" + mongoServiceName + "' found in VCAP_SERVICES ! ");
+        console.log("Url for mongodb : '" + mongoUrl + "'");
+        console.log("DB for mongodb : '" + mongoDbName + "'");
     }
-
-    console.log("'" + mongoServiceName + "' found in VCAP_SERVICES ! ");
-    console.log("Url for mongodb : '" + mongoUrl + "'");
-    console.log("DB for mongodb : '" + mongoDbName + "'");
 
     return { "url" : mongoUrl, "db" : mongoDbName};
 }
@@ -53,8 +53,8 @@ var getMongoUrlForService = function(mongoServiceName) {
 // get mongoDb Url fo metadata service
 const mongoServiceBaseName = "iot_hub_mongo_" + landscapeName + "_" + tenantName;
 var mongoConnData = getMongoUrlForService(mongoServiceBaseName + "_metadata");
-const mongoUrl = mongoConnData.url; 
-const mongoDbName = mongoConnData.db;
+var mongoUrl = mongoConnData.url; 
+var mongoDbName = mongoConnData.db;
 
 // odata service model
 var model = {
@@ -127,6 +127,17 @@ odataServer.error(function(req, res, error, next){
 // Connection to database in MongoDB
 var mongoClient = require('mongodb').MongoClient;
 
+if(process.env.MONGODB_URL !== undefined && services[mongoServiceBaseName + "_metadata"] === undefined){
+    mongoUrl = process.env.MONGODB_URL;
+    var mongodbUri = require('mongodb-uri');
+    var uriObject = mongodbUri.parse(mongoUrl);
+    mongoDbName = uriObject.database;
+
+    console.log("mongodb url found in process.env.MONGODB_URL ! ");
+    console.log("Url for mongodb : '" + mongoUrl + "'");
+    console.log("DB for mongodb : '" + mongoDbName + "'");
+}
+
 MongoClient.connect(mongoUrl, function(err, db) {
     
     if(err){
@@ -180,5 +191,5 @@ app.use("/", auth, function (req, res) {
 
 // The app listens on port 8080 (or other from env) and prints the endpoint URI in console window.
 var server = app.listen(port, function () {
-    console.log('Metadata OData service listening on ' + appEnv.url + ':' + process.env.PORT);
+    console.log('Metadata OData service listening on ' + appEnv.url + ':' + port);
 });
